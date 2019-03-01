@@ -1,22 +1,6 @@
-%% Project 1 Anamorphs
-
-% Cory Fisher
-% Linear Algebra, MAT-345
-
-%% Part 1
-
-% part a
-% read in the image of the circle
-I = imread('finalprojectpart1.JPG');
-% display the image
-imshow(I)
-
-% part b
-% rotate the image 30 degrees using the rotation matrix
-%rotateM = [cos(30), -sin(30); sin(30), cos(30)];
-%rotatedI = I*rotateM;
-%imshow(rotatedI)
-
-% check the rotation
-rotateCheck = imrotate(I, 30);
-imshow(rotateCheck)
+G = imread("pic.PNG");
+G_ref = imref2d(size(G))
+R = [cosd(30) sind(30) 0;-sind(30) cosd(30) 0;0 0 1];
+rform = affine2d(R)
+G_rotated = imwarp(G,rform)
+imshow(G_rotated)
