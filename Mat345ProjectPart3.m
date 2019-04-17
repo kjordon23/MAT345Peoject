@@ -8,3 +8,8 @@ rform=affine3d(R3);
 B=imwarp(A,rform);
 imshow(B)
 
+% rotating back
+D=inv(R3);
+dform=affine3d(D);
+C=imwarp(B,dform);
+imshow(C)
