@@ -1,12 +1,19 @@
-I = imread('art.png');
-A = imresize(I,[600,900]);
+
+
+
+R = [0 -1 0;1 0 0;0 0 1]
+A = imread('art.png');
+rform = affine2d(R);
+A = imwarp(A,rform);
+
+A = imresize(A,[600,900]);
 imshow(A)
 A = rgb2gray(A);
 A = double(A);
 %%Building the Zero Matrix
 
 Matrix = zeros(1800,900);
-
+%% Making Matrix in (x, y, g)
 %%filling in the zero matrix with x , y , g;
 %multiply size of A,1 by 3 to make room for x y and g
 for i = 3:3:1800;
@@ -26,7 +33,7 @@ Matrix(i-1,:) = rows ;
 Matrix(i,:) = gradient;
 end
 
-
+%% creating the transformation matrix
 RMatrix = eye(1800,1800);
 for p = 1:3:1800;
 RMatrix(p,p) = 1/4;
@@ -34,7 +41,7 @@ end
 
 
 
-
+%% get the product to transform the matrix
 NMatrix = RMatrix*Matrix;
 
 
@@ -44,9 +51,7 @@ C_Matrix = zeros(600,224);
 Zero = zeros(3,900);
 
 
-
-
-
+%% translate image back to original format
 %delete all numbers that have a decimal.
 for j = 3:3:1800;
 x = 1
