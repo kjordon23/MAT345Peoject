@@ -15,3 +15,8 @@ D=inv(R3); % inverse of the transformation matrix is supposed to revert the imag
 dform=affine3d(D); 
 C=imwarp(B,dform); % transforming the image back to the original
 imshow(C)
+
+[Q,R]=qr(R3)
+
+Q1=[.6666,.7455,0,0]'; % the column vector from Q that is going out from the image at the optimal viewing angle
+Theta=atand(.7455/.6666) % using arctangent to find the angle that is orthogonal to the image
